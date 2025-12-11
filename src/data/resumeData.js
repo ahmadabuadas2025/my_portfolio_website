@@ -4,17 +4,17 @@
 export const personalInfo = {
   name: 'Ahmad Jamal Abuadas',
   title: 'AI/ML | Data Engineer | Big Data | Data Science | IOT',
-  email: 'ahmadabuadas2013@gmail.com',
+  email: 'aja.it.2024@gmail.com',
   phone: '(850) 449-9890',
-  location: 'Jacksonville, FL 32256',
+  location: 'Tampa, FL',
   summary: 'Experienced Data Engineer and Data Scientist with 14 years of overall experience in software engineering, specializing in financial data systems. Expert in building and supporting Anti-Money Laundering (AML) systems on cloud platforms, leveraging AI technologies, machine learning tools, and data science methodologies to enhance compliance and risk management. Proficient in Python, SQL, PySpark, and cloud technologies including AWS, Snowflake, and Databricks. Specialized in designing scalable data architectures, implementing AI-powered analytics, and developing automated compliance solutions for financial institutions.',
   profileImage: '/images/profile.jpg', // Add your profile image to public/images/profile.jpg
   resumePdf: '/Ahmad_data_engineer_2025.pdf',
 }
 
 export const socialLinks = {
-  linkedin: 'https://linkedin.com/in/yourprofile', // Update with your LinkedIn
-  github: 'https://github.com/yourusername', // Update with your GitHub
+  linkedin: 'https://www.linkedin.com/in/ahmad-abuadas-a5ba03103/',
+  github: 'https://github.com/ahmadabuadas2025',
   twitter: '', // Update or remove if not applicable
 }
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaArrowDown } from 'react-icons/fa'
+import { FaArrowDown, FaLinkedin, FaGithub } from 'react-icons/fa'
 import {
   SiPython,
   SiAmazonaws,
@@ -14,7 +14,7 @@ import {
   SiPytorch,
   SiGit,
 } from 'react-icons/si'
-import { personalInfo } from '../data/resumeData'
+import { personalInfo, socialLinks } from '../data/resumeData'
 
 // Top technologies to display
 const techIcons = [
@@ -215,7 +215,7 @@ const Hero = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex justify-center items-center"
+            className="flex flex-col items-center gap-6"
           >
             <motion.a
               href="#contact"
@@ -225,6 +225,36 @@ const Hero = () => {
             >
               Get In Touch
             </motion.a>
+            
+            {/* Social Media Icons */}
+            <div className="flex gap-4">
+              {socialLinks.linkedin && (
+                <motion.a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 glass-strong rounded-full hover:bg-primary-500/20 transition-colors"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin className="w-6 h-6 text-primary-500" />
+                </motion.a>
+              )}
+              {socialLinks.github && (
+                <motion.a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 glass-strong rounded-full hover:bg-primary-500/20 transition-colors"
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="GitHub"
+                >
+                  <FaGithub className="w-6 h-6 text-primary-500" />
+                </motion.a>
+              )}
+            </div>
           </motion.div>
 
           <motion.div

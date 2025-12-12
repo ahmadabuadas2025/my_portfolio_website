@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion'
-import { FaArrowDown, FaLinkedin, FaGithub } from 'react-icons/fa'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaArrowDown, FaLinkedin, FaGithub, FaBrain, FaCode } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
+import Robot from './Robot'
 import {
   SiPython,
   SiAmazonaws,
@@ -13,6 +15,7 @@ import {
   SiTensorflow,
   SiPytorch,
   SiGit,
+  SiGithub,
 } from 'react-icons/si'
 import { personalInfo, socialLinks } from '../data/resumeData'
 
@@ -30,6 +33,8 @@ const techIcons = [
   { Icon: SiTensorflow, name: 'TensorFlow', delay: 4.5 },
   { Icon: SiPytorch, name: 'PyTorch', delay: 5 },
   { Icon: SiGit, name: 'Git', delay: 5.5 },
+  { Icon: FaBrain, name: 'ML', delay: 6 },
+  { Icon: SiGithub, name: 'Copilot', delay: 6.5 },
 ]
 
 // Positions for floating icons
@@ -46,9 +51,29 @@ const iconPositions = [
   { top: '85%', right: '10%' },
   { top: '20%', left: '15%' },
   { top: '60%', right: '15%' },
+  { top: '35%', left: '12%' },
+  { top: '55%', right: '18%' },
 ]
 
 const Hero = () => {
+  const [showRobot, setShowRobot] = useState(true)
+  const [robotPhase, setRobotPhase] = useState('walking') // walking, smiling, sayingHello, disappearing
+
+  useEffect(() => {
+    // Sequence: walk to middle (5s) -> smile (1s) -> say hello (1.5s) -> disappear
+    const timer1 = setTimeout(() => setRobotPhase('smiling'), 5000)
+    const timer2 = setTimeout(() => setRobotPhase('sayingHello'), 6000)
+    const timer3 = setTimeout(() => setRobotPhase('disappearing'), 7500)
+    const timer4 = setTimeout(() => setShowRobot(false), 8000)
+
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+      clearTimeout(timer3)
+      clearTimeout(timer4)
+    }
+  }, [])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,10 +95,11 @@ const Hero = () => {
     },
   }
 
+
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-visible"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 dark:from-primary-900/30 dark:via-accent-900/30 dark:to-primary-900/30">
@@ -194,9 +220,38 @@ const Hero = () => {
 
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold mb-4"
+            className="text-5xl md:text-7xl font-bold mb-4 relative inline-block w-full"
           >
-            <span className="gradient-text">{personalInfo.name}</span>
+            <span className="gradient-text relative z-10 inline-block">{personalInfo.name}</span>
+            
+            {/* Custom Robot Walking Over Name */}
+            <AnimatePresence>
+              {showRobot && (
+                <>
+                  <Robot phase={robotPhase} />
+                  
+                  {/* "Hi" Speech Bubble */}
+                  {robotPhase === 'sayingHello' && (
+                    <motion.div
+                      className="absolute left-1/2 -translate-x-1/2 z-50"
+                      style={{ top: '85%' }}
+                      initial={{ opacity: 0, y: -10, scale: 0.8 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.8 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="relative">
+                        <div className="bg-white dark:bg-gray-800 text-primary-500 dark:text-primary-400 px-4 py-2 rounded-2xl text-base font-bold shadow-2xl whitespace-nowrap border-2 border-primary-500/30">
+                          Hi!
+                        </div>
+                        {/* Speech bubble tail pointing up to robot */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-0 h-0 border-l-6 border-r-6 border-b-6 border-transparent border-b-white dark:border-b-gray-800"></div>
+                      </div>
+                    </motion.div>
+                  )}
+                </>
+              )}
+            </AnimatePresence>
           </motion.h1>
 
           <motion.p

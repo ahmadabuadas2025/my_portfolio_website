@@ -124,10 +124,20 @@ export const experience = [
 
 export const education = [
   {
+    degree: 'Master of Science in FinTech',
+    institution: 'University of South Florida (USF)',
+    logo: '/images/usf.png',
+    period: '2026 - 2027',
+    location: 'USA',
+    description: 'STEM-designated graduate program at the Muma College of Business focused on the intersection of finance and technology. The 30-credit curriculum covers quantitative analytics, payment technologies, big data analytics, machine learning, artificial intelligence, and digital assets, applied to real-world financial systems and culminating in a capstone project.',
+    achievements: ['STEM-Designated Program', 'Quantitative Analytics', 'Payment Technologies', 'Machine Learning & AI in Finance', 'Capstone Project'],
+    gpa: '',
+  },
+  {
     degree: 'Master\'s in Information Technology',
     institution: 'Walden University',
     logo: '/images/walden.png',
-    period: 'Completed',
+    period: '2018 - 2020',
     location: 'USA',
     description: 'Comprehensive graduate program covering Data Architecture, Big Data technologies, Cloud computing, and Data Governance. This academic journey provided advanced theoretical knowledge and best practices that complement extensive hands-on experience in enterprise data solutions.',
     achievements: ['Data Architecture', 'Big Data', 'Cloud Computing', 'Data Governance'],

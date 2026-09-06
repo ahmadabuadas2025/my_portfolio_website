@@ -127,9 +127,19 @@ button{font:inherit;color:inherit}
 .bands{position:absolute;inset:0;z-index:5}
 .band{position:absolute;left:var(--pad);top:0;height:100%;width:min(46ch,52vw);
   display:flex;flex-direction:column;justify-content:center;opacity:0;text-shadow:var(--tshadow)}
-.band::before{content:"";position:absolute;inset:-14% -34% -14% -46%;pointer-events:none;z-index:-1;
+/* Per-band scrim. --sa is tuned per band against that band's WORST frame,
+   never its average, and the gradient still dies out by 78% so the corners stay live. */
+.band::before{content:"";position:absolute;inset:-16% -30% -16% -50%;pointer-events:none;z-index:-1;
   opacity:calc(.25 + .75*var(--k,1));
-  background:radial-gradient(ellipse 78% 60% at 42% 50%,rgba(4,5,12,.74) 0%,rgba(4,5,12,.52) 46%,rgba(4,5,12,0) 76%)}
+  background:radial-gradient(ellipse 84% 66% at 40% 50%,
+    rgba(4,5,12,var(--sa,.78)) 0%,
+    rgba(4,5,12,calc(var(--sa,.78)*.86)) 42%,
+    rgba(4,5,12,calc(var(--sa,.78)*.45)) 62%,
+    rgba(4,5,12,0) 78%)}
+.band:nth-child(1){--sa:.93}
+.band:nth-child(2){--sa:.91}
+.band:nth-child(3){--sa:.84}
+.band:nth-child(4){--sa:.82}
 .band .kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--signal);margin-bottom:20px;opacity:var(--k,1)}
 .band h1{font-size:clamp(42px,6.6vw,86px);max-width:15ch}
 .band h2{font-size:clamp(32px,5.2vw,66px);font-weight:700;max-width:16ch}
@@ -160,7 +170,7 @@ button{font:inherit;color:inherit}
    THE STATIC HERO (five gates)
    ============================================================ */
 .static-hero{display:none;position:relative;min-height:92vh;z-index:1;
-  background:var(--canvas) center/cover no-repeat;align-items:flex-end}
+  background:var(--canvas) url('assets/hero-ending.jpg') center/cover no-repeat;align-items:flex-end}
 .static-hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,20,.72) 0%,rgba(10,11,20,.42) 34%,rgba(10,11,20,.94) 100%)}
 .static-hero .inner{position:relative;padding:0 var(--pad) clamp(56px,10vh,96px);width:100%;text-shadow:var(--tshadow)}
 .static-hero h1{font-size:clamp(40px,10vw,64px);max-width:13ch}
@@ -924,7 +934,7 @@ splitAll();
    THE SCRUB HERO
    ============================================================ */
 var VIDEO_URL='assets/hero-scrub.mp4';
-var VIDEO_BYTES=4200000;              /* real byte size, patched after encoding */
+var VIDEO_BYTES=4239290;              /* the real encoded byte size, the fallback when Content-Length is missing */
 var POSTER_URL='assets/hero-poster.jpg';
 
 var hero=document.getElementById('hero');
